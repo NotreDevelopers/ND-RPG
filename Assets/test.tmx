@@ -3,9 +3,12 @@
  <tileset firstgid="1" name="test" tilewidth="32" tileheight="32">
   <image source="../../../../Downloads/Untitled.pyxel.png" width="256" height="64"/>
  </tileset>
+ <tileset firstgid="17" name="test" tilewidth="32" tileheight="32">
+  <image source="../../../../Downloads/test.png" width="256" height="128"/>
+ </tileset>
  <layer name="Tile Layer 1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt18kKgzAUBdA4dPT//7cNKLymsVgaXZRz4C4MWUiuiWRMKY1zujn3Z6bwPIacKslzaGMIOaf3tb4Vc/JY2c90+Fv/r2UP1LqInSzz8vMlRB9txXXO6cPYNb2eSfrYX9lHV0Qfx9rax6foo51v90c8w+L5Rhvlusd/d/zHlz2VoY217762B/Sxv3iXqHXSF3PWQhvxrrd2Px82BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD43QP4OQL7
+   eJzt18tOwzAQBdChTaDACraoEZvy/P//wxW2GNJERcLdnSPdRZRZ+Sp2PETEUHNVc1dyn54faj5KxoUcZ+hjm3Idp2t9G6d9DCljfUcf7RtY6iJ3cpxpfdyk6KOv1kdb+0PJvmQq+Yzfe5I+Lu+ppq37S/x0lM+Lt5L30MelPdac62M+l6OPfqaac320uf0sU/i/6ml+frzG996U96cxza2FPtp67mL9/2qT5p5XQh/5LrHUyWY2sxb6yPfBtfv59g8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7vC4uHCEw=
   </data>
  </layer>
 </map>
