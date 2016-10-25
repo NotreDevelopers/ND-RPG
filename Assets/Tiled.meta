@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scenes.meta
+guid: 1cfe027ad59d4564283760a7369ef8e2
+folderAsset: yes
+timeCreated: 1477269391
+=======
 guid: e0b8b7f9b5ee9be4da6093e3fb5586da
 folderAsset: yes
 timeCreated: 1477424756
+>>>>>>> refs/remotes/origin/master:Assets/Tiled.meta
 licenseType: Free
 DefaultImporter:
   userData: 
