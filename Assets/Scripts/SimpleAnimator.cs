@@ -6,9 +6,13 @@ using System.Linq;
 
 public class SimpleAnimator : MonoBehaviour
 {
+    /* Most of the code here was borrowed from Joe Strout, specifically from his blog post on
+     * Gamasutra about Unity 2D animation methods:
+     * http://www.gamasutra.com/blogs/JoeStrout/20150807/250646/2D_Animation_Methods_in_Unity.php */
+
     #region Public Properties
     [System.Serializable]
-    public class Anim
+    public class Anim // Class for individual animations
     {
         public string name;
         public Sprite[] frames;
@@ -27,19 +31,20 @@ public class SimpleAnimator : MonoBehaviour
             }
         }
     }
-    public List<Anim> animations = new List<Anim>();
+
+    public List<Anim> animations = new List<Anim>(); // List of animations
 
     [HideInInspector]
     public int currentFrame;
 
     [HideInInspector]
-    public bool done
+    public bool done // Checks whether the current animation has finished (does not work when looping)
     {
         get { return currentFrame >= current.frames.Length; }
     }
 
     [HideInInspector]
-    public bool playing
+    public bool playing // Checks whether any animations are playing
     {
         get { return _playing; }
     }
