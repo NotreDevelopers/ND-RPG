@@ -19,7 +19,8 @@ public class SimpleMove : MonoBehaviour {
     Vector2 moveDir;
     Vector2 oldPos;
 
-    int impLayer; // Layer in Unity for impassible objects
+    int impLayer; // Layer in Unity for impassible colliders
+    int eventLayer; // Layer in Unity for event colliders
 
     const float COLL_NEW_SCALE = 0.9f; // Rescales collider so that edges of collider don't touch other colliders
     const float MOVE_INPUT_THRESHOLD = 0.01f;
@@ -38,6 +39,7 @@ public class SimpleMove : MonoBehaviour {
         dtime = deadTime; // Set so movement can happen immediately
 
         impLayer = LayerMask.NameToLayer("Impassable");
+        eventLayer = LayerMask.NameToLayer("Event");
     }
 
     void FixedUpdate()
@@ -53,6 +55,13 @@ public class SimpleMove : MonoBehaviour {
             dtime = 0;
             this.transform.position = oldPos;
             coll.offset = Vector2.zero;
+        }
+        if (collided.gameObject.layer == eventLayer)
+        {
+            if (collided.gameObject.GetComponent<EventHandler>() != null)
+            {
+                collided.gameObject.GetComponent<EventHandler>().RunEvent();
+            }
         }
     }
 

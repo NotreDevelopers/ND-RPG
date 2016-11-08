@@ -10,16 +10,13 @@ public class ForceMove : MonoBehaviour
     #endregion
     //---------------------------------------------------------------------------------
     #region Private Properties
-    BoxCollider2D coll;
     Rigidbody2D rbdy;
-    SimpleAnimator anim;
 
     float dtime = 0;
     float speed;
     bool moving = false;
 
     Vector2 moveDir;
-    Vector2 oldPos;
 
     const float MOVE_INPUT_THRESHOLD = 0.01f;
 
@@ -29,9 +26,7 @@ public class ForceMove : MonoBehaviour
 
     void Start()
     {
-        coll = this.GetComponent<BoxCollider2D>();
         rbdy = this.GetComponent<Rigidbody2D>();
-        anim = this.GetComponent<SimpleAnimator>();
 
         rbdy.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -53,7 +48,6 @@ public class ForceMove : MonoBehaviour
         {
             if (Mathf.Abs(Input.GetAxis("Horizontal")) > MOVE_INPUT_THRESHOLD)
             {
-                oldPos = this.transform.position;
                 moveDir = Vector2.right * Input.GetAxis("Horizontal");
                 moveDir.Normalize();
 
@@ -62,7 +56,6 @@ public class ForceMove : MonoBehaviour
             }
             else if (Mathf.Abs(Input.GetAxis("Vertical")) > MOVE_INPUT_THRESHOLD)
             {
-                oldPos = this.transform.position;
                 moveDir = Vector2.up * Input.GetAxis("Vertical");
                 moveDir.Normalize();
 
