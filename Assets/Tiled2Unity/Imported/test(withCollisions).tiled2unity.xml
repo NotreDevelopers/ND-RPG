@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <!--Tiled2Unity generated xml data-->
 <!--Do not modify by hand-->
-<!--Last exported: 11/4/2016 10:34:35 PM-->
+<!--Last exported: 11/8/2016 12:01:47 AM-->
 <Tiled2Unity version="1.0.7.8">
   <AssignMaterial mesh="mesh_0001" material="testtiles" />
   <Prefab name="test(withCollisions)" orientation="Orthogonal" staggerAxis="Y" staggerIndex="Odd" hexSideLength="0" numLayers="1" numTilesWide="100" numTilesHigh="100" tileWidth="32" tileHeight="32" exportScale="0.03125" mapWidthInPixels="3200" mapHeightInPixels="3200">
