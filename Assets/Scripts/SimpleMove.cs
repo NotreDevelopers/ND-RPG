@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class SimpleMove : MonoBehaviour {
     #region Public Properties
     public float moveDist = 1; // Distance of a block of movement
     public float moveTime = 1; // Time for a block of movement (distance/time = speed)
     public float deadTime = 0.1f; // Amount of time spent restarting movement to reset collider
+
+	public AudioSource audio;
 
     #endregion
     //---------------------------------------------------------------------------------
@@ -38,6 +42,8 @@ public class SimpleMove : MonoBehaviour {
         dtime = deadTime; // Set so movement can happen immediately
 
         impLayer = LayerMask.NameToLayer("Impassable");
+
+		audio = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -49,6 +55,8 @@ public class SimpleMove : MonoBehaviour {
     {
         if (collided.gameObject.layer == impLayer) // Checks if collider is part of impassable layer, and if so, rejects movement
         {
+			audio.Play ();
+
             moving = false;
             dtime = 0;
             this.transform.position = oldPos;
