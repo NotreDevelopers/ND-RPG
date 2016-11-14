@@ -62,7 +62,7 @@ public class SimpleMove : MonoBehaviour {
         {
             if (collided.gameObject.GetComponent<EventHandler>() != null)
             {
-                //collided.gameObject.GetComponent<EventHandler>().RunEvent();
+                //collided.gameObject.GetComponent<EventHandler>().RunEvent(); <--- I don't if "activating" the event here or in the EventHandler.cs code is better
                 collided.gameObject.GetComponent<EventHandler>().runEvent = true;
             }
         }

@@ -12,8 +12,7 @@ public class EventHandler : MonoBehaviour {
         public Vector2 offset;
         public Vector2 size;
     }
-
-    public float reshapeTime = 5.0f;
+    public float reshapeTime = 3.0f;
 
     public List<CollPair> Sequence;
 
@@ -77,6 +76,9 @@ public class EventHandler : MonoBehaviour {
              * shapes to iterate through, while the advantage of the latter is simplicity. */
 
             iterator++;
+            if (iterator >= Sequence.Count)
+                iterator = 0;
+
             coll.size = Sequence[iterator].size;
             coll.offset = Sequence[iterator].offset;
 
