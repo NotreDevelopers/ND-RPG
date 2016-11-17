@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SimpleMove : MonoBehaviour {
     #region Public Properties
+
     public float moveDist = 1; // Distance of a block of movement
     public float moveTime = 1; // Time for a block of movement (distance/time = speed)
     public float deadTime = 0.1f; // Amount of time spent restarting movement to reset collider
@@ -10,6 +11,7 @@ public class SimpleMove : MonoBehaviour {
     #endregion
     //---------------------------------------------------------------------------------
     #region Private Properties
+
     BoxCollider2D coll;
     SimpleAnimator anim;
 
@@ -27,7 +29,7 @@ public class SimpleMove : MonoBehaviour {
 
     #endregion
     //---------------------------------------------------------------------------------
-    #region Runtime Functions
+    #region MonoBehavior Methods
 
     void Start()
     {
@@ -47,27 +49,33 @@ public class SimpleMove : MonoBehaviour {
         Move();
     }
 
-    void OnTriggerEnter2D(Collider2D collided) // Standard Unity function for when this.collider enters another collider (as trigger)
+    void OnTriggerEnter2D(Collider2D collided) // Standard Unity function for when this.collider enters another collider (trigger enabled)
     {
-        if (collided.gameObject.layer == impLayer) // Checks if collider is part of impassable layer, and if so, rejects movement
+        if (collided.gameObject.layer == impLayer) // Checks if other collider is part of impassable layer, and if so, rejects movement
         {
             moving = false;
             dtime = 0;
             this.transform.position = oldPos;
             coll.offset = Vector2.zero;
         }
-        if (collided.gameObject.layer == eventLayer)
+        if (collided.gameObject.layer == eventLayer) // Checks if other collider is part of event layer, and if so, begins event (through EventHandler.cs)
         {
             if (collided.gameObject.GetComponent<EventHandler>() != null)
             {
-                collided.gameObject.GetComponent<EventHandler>().RunEvent();
+                //collided.gameObject.GetComponent<EventHandler>().RunEvent();
+                collided.gameObject.GetComponent<EventHandler>().runEvent = true;
             }
         }
     }
 
     #endregion
     //---------------------------------------------------------------------------------
-    #region Additional Functions
+    #region Additional Methods
+
+    public bool getMoving() // Used for other scripts to detect if game object is moving
+    {
+        return moving;
+    }
 
     /* Move: Utilizes both a boolean and time limitation to move the game object by increments.
      *      After input is received, the character moves in the input direction for a selected distance
