@@ -3,9 +3,12 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour {
 
-    public GameObject following;
+    private GameObject following;
 
-    private Vector3 folPos;
+    void Awake()
+    {
+        following = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update()
     {
