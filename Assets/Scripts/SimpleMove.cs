@@ -8,6 +8,9 @@ public class SimpleMove : MonoBehaviour {
     public float moveTime = 1; // Time for a block of movement (distance/time = speed)
     public float deadTime = 0.1f; // Amount of time spent restarting movement to reset collider
 
+    public float speedMultiplier = 2; // Divides movement time (USED FOR SPEED MULTIPLICATION)
+    public KeyCode speedKey = KeyCode.RightShift; // Key corresponding to speed multiplier (USED FOR SPEED MULTIPLICATION)
+
     #endregion
     //---------------------------------------------------------------------------------
     #region Private Properties
@@ -17,6 +20,8 @@ public class SimpleMove : MonoBehaviour {
 
     float dtime = 0; // Time spent moving (restarts every block of movement)
     bool moving = false;
+
+    float tempSpdMult = 1; // Acts as speed multiplier within code when correct key is pressed (USED FOR SPEED MULTIPLICATION)
 
     Vector2 moveDir;
     Vector2 oldPos;
@@ -62,7 +67,7 @@ public class SimpleMove : MonoBehaviour {
         {
             if (collided.gameObject.GetComponent<EventHandler>() != null)
             {
-                //collided.gameObject.GetComponent<EventHandler>().RunEvent();
+                //collided.gameObject.GetComponent<EventHandler>().RunEvent(); <--- I don't if "activating" the event here or in the EventHandler.cs code is better
                 collided.gameObject.GetComponent<EventHandler>().runEvent = true;
             }
         }
@@ -97,8 +102,8 @@ public class SimpleMove : MonoBehaviour {
                     moveDir.Normalize(); // Making sure movement input is unitary
 
                     if (moveDir.x > 0) // Plays animations on SimpleAnimator depending on which direction of movement
-                        anim.Play("right");
-                    else anim.Play("left");
+                        anim.Play("right-m");
+                    else anim.Play("left-m");
 
                     moving = true; // Begin next section of logic
                     dtime = 0;
@@ -109,8 +114,8 @@ public class SimpleMove : MonoBehaviour {
                     moveDir.Normalize();
 
                     if (moveDir.y > 0)
-                        anim.Play("up");
-                    else anim.Play("down");
+                        anim.Play("up-m");
+                    else anim.Play("down-m");
 
                     moving = true;
                     dtime = 0;
@@ -123,18 +128,27 @@ public class SimpleMove : MonoBehaviour {
             {
                 oldPos = this.transform.position;
                 coll.offset = moveDir;
+
+                if (Input.GetKey(speedKey)) // Changes temporary-speed-multiplier to new value when key is pressed (USED FOR SPEED MULTIPLICATION)
+                    tempSpdMult = 1/speedMultiplier; // (USED FOR SPEED MULTIPLICATION)
+                else tempSpdMult = 1; // (USED FOR SPEED MULTIPLICATION)
+
             }
-            if (dtime < moveTime) // If no collisions, while the change in time is less than movement time, increment distance moved
+            if (dtime < moveTime * tempSpdMult) // If no collisions, while the change in time is less than movement time, increment distance moved
             {
                 coll.offset = (moveDir) * (moveTime - dtime);
 
-                this.transform.position = oldPos + moveDir * (dtime / moveTime);
+                this.transform.position = oldPos + moveDir * (dtime / (moveTime * tempSpdMult)); // (USED FOR SPEED MULTIPLICATION) NOTE: This and the if-statement have tempSpdMult's in them
             }
             else // When change in time is greater than movement time, set final position and restart collider and movement boolean
             {
                 this.transform.position = oldPos + moveDir;
                 coll.offset = Vector2.zero;
                 moving = false;
+                if (anim.currentAnim == "right-m") { anim.Play("right"); } // The following set of if-statements change the movement animation to
+                else if (anim.currentAnim == "left-m") { anim.Play("left"); } // the corresponding idle animation between/after moving
+                else if (anim.currentAnim == "up-m") { anim.Play("up"); }
+                else if (anim.currentAnim == "down-m") { anim.Play("down"); }
             }
 
             dtime += Time.deltaTime; // Steps change in time by Unity's frame-time

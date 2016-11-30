@@ -49,6 +49,12 @@ public class SimpleAnimator : MonoBehaviour
         get { return _playing; }
     }
 
+    [HideInInspector]
+    public string currentAnim
+    {
+        get { return current.name; }
+    }
+
     #endregion
     //--------------------------------------------------------------------------------
     #region Private Properties
