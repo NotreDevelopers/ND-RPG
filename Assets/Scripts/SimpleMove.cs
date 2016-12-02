@@ -55,7 +55,7 @@ public class SimpleMove : MonoBehaviour {
     {
         if (collided.gameObject.layer == impLayer) // Checks if collider is part of impassable layer, and if so, rejects movement
         {
-			audio.Play ();
+			//audio.Play ();
 
             moving = false;
             dtime = 0;
@@ -83,7 +83,7 @@ public class SimpleMove : MonoBehaviour {
             if (dtime > deadTime)
             {
                 if (Mathf.Abs(Input.GetAxis("Horizontal")) > MOVE_INPUT_THRESHOLD) // Logic for horizontal movement
-                {
+				{
                     moveDir = Vector2.right * Input.GetAxis("Horizontal");
                     moveDir.Normalize(); // Making sure movement input is unitary
 
