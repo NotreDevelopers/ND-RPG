@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour {
 		dBox.SetActive (false);
 		player = GameObject.FindGameObjectWithTag ("Player");
 
-		canDisplay = true;
+		canDisplay = false;
 		//dialogueZone = GameObject.FindGameObject.GetComponent<BoxCollider2D>();
 		//what i need: 
 		/* if the player's collision is colliding with the dialogue collider. 
@@ -45,6 +45,11 @@ public class DialogueManager : MonoBehaviour {
 	// For other text to show
 	public void ShowBox(string Dialogue)
 	{
+		if (!canDisplay) {
+			dBox.SetActive(false); //deactivate box
+			dialogActive = false;
+			return;
+		}
 		dText.text = Dialogue;
 		dialogActive = true;
 		dBox.SetActive (true);

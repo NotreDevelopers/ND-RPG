@@ -77,6 +77,8 @@ public class EventHandler : MonoBehaviour {
              * shapes to iterate through, while the advantage of the latter is simplicity. */
 
             iterator++;
+			if (iterator >= Sequence.Count)
+				iterator = 0; // MAV 12/2/2016
             coll.size = Sequence[iterator].size;
             coll.offset = Sequence[iterator].offset;
 
